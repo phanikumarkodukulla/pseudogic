@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudogic | Problem Solving</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="code.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="code.png">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Product Sans', sans-serif;
+    background-color: #ffffff;
+    color: #202124;
+    line-height: 1.6;
+    font-size: 16px; /* Increased from 14px for better readability */
+}
+
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e8eaed;
+    padding: 1rem 0; /* Increased padding */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-weight: 500; /* Increased from 400 */
+    font-size: 1.5rem; /* Increased from 1.375rem */
+    color: #5f6368 !important;
+    font-family: 'Google Sans', sans-serif;
+}
+
+.hero-section {
+    background-color: #ffffff;
+    color: #202124;
+    padding: 80px 0; /* Increased padding */
+    text-align: center;
+    border-bottom: 1px solid #e8eaed;
+}
+
+.hero-title {
+    font-size: 3.5rem; /* Increased from 2.75rem */
+    font-weight: 500; /* Increased from 400 */
+    margin-bottom: 1rem; /* Increased margin */
+    font-family: 'Product Sans', sans-serif;
+    color: #202124;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem; /* Increased from 1rem */
+    margin-bottom: 2.5rem; /* Increased margin */
+    color: #5f6368;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 4rem; /* Increased gap */
+    margin-top: 3rem; /* Increased margin */
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem; /* Increased from 2rem */
+    font-weight: 600; /* Increased from 500 */
+    color: #1a73e8;
+    font-family: 'Product Sans', sans-serif;
+    line-height: 1.1;
+}
+
+.stat-label {
+    font-size: 1rem; /* Increased from 0.875rem */
+    color: #5f6368;
+    font-weight: 500; /* Increased from 400 */
+    margin-top: 0.5rem;
+}
+
+.filter-section {
+    background-color: #ffffff;
+    padding: 2rem 0; /* Increased padding */
+    border-bottom: 1px solid #e8eaed;
+}
+
+.filter-btn {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    color: #3c4043;
+    padding: 0.75rem 1.25rem; /* Increased padding */
+    margin: 0.25rem;
+    border-radius: 6px; /* Slightly increased border radius */
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 1rem; /* Increased from 0.875rem */
+    font-family: 'Product Sans', sans-serif;
+}
+
+.filter-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #dadce0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.filter-btn.active {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+    color: #ffffff;
+}
+
+.search-container {
+    position: relative;
+    max-width: 450px; /* Increased width */
+    margin: 0 auto;
+}
+
+.search-input {
+    border: 1px solid #dadce0;
+    border-radius: 24px;
+    padding: 1rem 1.25rem; /* Increased padding */
+    padding-left: 3rem;
+    font-size: 1rem; /* Increased from 0.875rem */
+    width: 100%;
+    transition: all 0.2s ease;
+    font-family: 'Product Sans', sans-serif;
+    background-color: #ffffff;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9aa0a6;
+}
+
+.problems-container {
+    padding: 3rem 0; /* Increased padding */
+    background-color: #ffffff;
+}
+
+.problem-card {
+    font-family: 'Product Sans', sans-serif;
+    background: #ffffff;
+    border-radius: 12px; /* Increased border radius */
+    padding: 2rem; /* Increased padding */
+    margin-bottom: 1.5rem; /* Increased margin */
+    border: 1px solid #e8eaed;
+    transition: all 0.2s ease;
+}
+
+.problem-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1); /* Enhanced shadow */
+    border-color: #dadce0;
+    transform: translateY(-2px); /* Added subtle lift effect */
+}
+
+.problem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem; /* Increased margin */
+}
+
+.problem-title {
+    font-size: 1.5rem; /* Increased from 1.2rem */
+    font-weight: 550; /* Increased from 500 */
+    color: #1a73e8;
+    margin-bottom: 0.5rem; /* Increased margin */
+    font-family: 'Product Sans', sans-serif;
+    text-decoration: none;
+    line-height: 1.3;
+}
+
+.problem-title:hover {
+    text-decoration: underline;
+}
+
+.problem-meta {
+    display: flex;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 1rem; /* Increased margin */
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    background-color: #F4B400;
+    padding: 8px 16px; /* Increased padding */
+    border-radius: 20px;
+    font-size: 0.9rem; /* Slightly decreased for better proportion */
+    color: black;
+    font-weight: 500; /* Increased from 500 */
+    font-family: 'Product Sans', sans-serif;
+}
+
+.difficulty-easy { 
+    background-color: #e8f5e8; 
+    color: #137333; 
+}
+
+.difficulty-medium { 
+    background-color: #fef7e0; 
+    color: #b06000; 
+}
+
+.difficulty-hard { 
+    background-color: #fce8e6; 
+    color: #d33b01; 
+}
+
+.problem-description {
+    color: #5f6368;
+    margin-bottom: 1.5rem; /* Increased margin */
+    line-height: 1.7; /* Increased line height */
+    font-size: 1.1rem; /* Slightly decreased from 1.2rem for better readability */
+    background: #f7f8f9;  
+    border-left: 4px solid rgb(6, 162, 76);
+    padding: 1.5rem 2rem; /* Increased padding */
+    border-radius: 8px; /* Increased border radius */
+}
+
+.problem-example {
+    background-color: #f8f9fa;
+    padding: 1.25rem; /* Increased padding */
+    border-radius: 8px; /* Increased border radius */
+    margin: 1rem 0; /* Increased margin */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95rem; /* Slightly decreased from 15px */
+    border-left: 4px solid #1a73e8;
+    color: #202124;
+    line-height: 1.5;
+}
+
+.hint-section {
+    background-color: #fff9e6;
+    padding: 1.25rem; /* Increased padding */
+    border-radius: 8px; /* Increased border radius */
+    margin: 1rem 0; /* Increased margin */
+    border-left: 4px solid #fbbc04;
+    display: none;
+    color: #5f6368;
+    font-size: 1rem; /* Increased from 0.875rem */
+    line-height: 1.6;
+}
+
+.hint-section.show {
+    display: block;
+}
+
+.problem-actions {
+    display: flex;
+    gap: 1rem; /* Increased gap */
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    border: 1px solid #1a73e8;
+    border-radius: 6px; /* Increased border radius */
+    padding: 0.75rem 2rem; /* Increased padding */
+    font-weight: 600; /* Increased from 500 */
+    transition: all 0.2s ease;
+    font-size: 1rem; /* Increased from 0.875rem */
+    color: #ffffff;
+    font-family: 'Product Sans', sans-serif;
+}
+
+.btn-primary:hover {
+    background-color: #1557b0;
+    border-color: #1557b0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15); /* Enhanced shadow */
+    transform: translateY(-1px); /* Added subtle lift */
+}
+
+.btn-outline-secondary {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    color: #5f6368;
+    border-radius: 6px; /* Increased border radius */
+    padding: 0.75rem 1.5rem; /* Increased padding */
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 1rem; /* Increased from 0.875rem */
+    font-family: 'Product Sans', sans-serif;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0; /* Increased padding */
+}
+
+.pagination .page-link {
+    border-radius: 6px; /* Increased border radius */
+    margin: 0 0.25rem; /* Increased margin */
+    border: 1px solid #dadce0;
+    color: #5f6368;
+    padding: 0.75rem 1rem; /* Increased padding */
+    transition: all 0.2s ease;
+    font-size: 1rem; /* Increased from 0.875rem */
+    font-family: 'Product Sans', sans-serif;
+    background-color: #ffffff;
+    font-weight: 500;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+    border-color: #dadce0;
+    transform: translateY(-1px);
+}
+
+.pagination .active .page-link {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+    color: #ffffff;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    color: #5f6368;
+    text-align: center;
+    padding: 2rem 0; /* Increased padding */
+    border-top: 1px solid #e8eaed;
+    font-size: 1rem; /* Increased from 0.875rem */
+}
+
+.loading {
+    text-align: center;
+    padding: 4rem; /* Increased padding */
+}
+
+.spinner-border {
+    color: #1a73e8;
+}
+
+/* Google-style focus states */
+button:focus,
+input:focus,
+.btn:focus {
+    outline: 2px solid #1a73e8;
+    outline-offset: 2px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px; /* Slightly smaller on mobile but still readable */
+    }
+    
+    .hero-title {
+        font-size: 2.5rem; /* Increased from 2rem */
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .stats-container {
+        flex-direction: column;
+        gap: 2rem; /* Increased gap */
+    }
+    
+    .stat-number {
+        font-size: 2.25rem;
+    }
+    
+    .problem-card {
+        padding: 1.5rem; /* Increased mobile padding */
+        margin-bottom: 1.25rem;
+    }
+    
+    .problem-title {
+        font-size: 1.3rem; /* Increased mobile title size */
+    }
+    
+    .problem-description {
+        font-size: 1rem;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .problem-actions {
+        justify-content: flex-start;
+    }
+    
+    .problem-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-btn {
+        font-size: 0.95rem; /* Increased from 0.8125rem */
+        padding: 0.65rem 1rem; /* Increased padding */
+    }
+    
+    .btn-primary,
+    .btn-outline-secondary {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.25rem;
+    }
+    
+    .problem-card {
+        padding: 1.25rem;
+    }
+    
+    .problem-title {
+        font-size: 1.2rem;
+    }
+    
+    .search-container {
+        max-width: 90%;
+    }
+}
+
+/* Additional Google-style utility classes */
+.text-google-blue {
+    color: #1a73e8;
+}
+
+.text-google-red {
+    color: #ea4335;
+}
+
+.text-google-yellow {
+    color: #fbbc04;
+}
+
+.text-google-green {
+    color: #34a853;
+}
+
+.bg-google-grey {
+    background-color: #f8f9fa;
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-code"></i> Pseudogic | Problem Solving
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#problems">Problems</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Master Problem Solving</h1>
+            <p class="hero-subtitle">100+ Carefully Crafted Programming Challenges for Beginners</p>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Problems</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Learning</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+                        <button class="btn filter-btn active" data-category="all">All Problems</button>
+                        <button class="btn filter-btn" data-category="arrays">Arrays</button>
+                        <button class="btn filter-btn" data-category="strings">Strings</button>
+                        <button class="btn filter-btn" data-category="math">Math</button>
+                        <button class="btn filter-btn" data-category="logic">Logic</button>
+                        <button class="btn filter-btn" data-category="games">Games</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Search problems..." id="searchInput">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Container -->
+    <section class="problems-container" id="problems">
+        <div class="container">
+            <div id="problemsList" class="row">
+                <!-- Problems will be loaded here -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <nav>
+                    <ul class="pagination" id="pagination">
+                        <!-- Pagination will be loaded here -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pseudogic | Problem Solving. Empowering developers worldwide.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        // Problem data
+        const problems = [
+            // Arrays Category
+            {
+                id: 1,
+                title: "Temperature Tracker",
+                category: "arrays",
+                difficulty: "easy",
+                description: "Create a program that tracks daily temperatures for a week. Find the hottest day, coldest day, and average temperature.",
+                example: "Input: [72, 75, 68, 80, 77, 73, 76]\nOutput: Hottest: 80°F (Day 4), Coldest: 68°F (Day 3), Average: 74.4°F",
+                hint: "Use array methods like Math.max(), Math.min(), and reduce() to calculate statistics."
+            },
+            {
+                id: 2,
+                title: "Shopping Cart Total",
+                category: "arrays",
+                difficulty: "easy",
+                description: "Calculate the total cost of items in a shopping cart, including tax and discounts.",
+                example: "Items: [{name: 'Apple', price: 1.50, qty: 3}, {name: 'Bread', price: 2.99, qty: 1}]\nTax: 8%, Discount: 10%\nOutput: Final Total: $5.89",
+                hint: "Calculate subtotal first, then apply discount, then add tax."
+            },
+            {
+                id: 3,
+                title: "Student Grade Analyzer",
+                category: "arrays",
+                difficulty: "easy",
+                description: "Analyze student grades to find class average, highest grade, lowest grade, and number of students passing (≥60).",
+                example: "Grades: [85, 92, 76, 88, 59, 94, 73]\nOutput: Average: 81, Highest: 94, Lowest: 59, Passing: 6/7",
+                hint: "Use filter() to count passing grades and basic array operations for statistics."
+            },
+            {
+                id: 4,
+                title: "Movie Rating System",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Create a movie rating system that calculates average ratings and finds the most and least popular movies.",
+                example: "Movies: [{'title': 'Action Hero', 'ratings': [4.5, 3.8, 4.2, 4.0]}]\nOutput: Average: 4.1, Most Popular: Action Hero",
+                hint: "Calculate average for each movie, then compare averages to find extremes."
+            },
+            {
+                id: 5,
+                title: "Inventory Manager",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Manage store inventory by tracking stock levels, finding low stock items, and calculating total inventory value.",
+                example: "Items: [{'name': 'Laptop', 'stock': 5, 'price': 999}, {'name': 'Mouse', 'stock': 2, 'price': 25}]\nLow Stock Threshold: 3\nOutput: Low Stock: ['Mouse'], Total Value: $5045",
+                hint: "Use filter() for low stock items and reduce() for total value calculation."
+            },
+
+            // Strings Category
+            {
+                id: 6,
+                title: "Password Strength Checker",
+                category: "strings",
+                difficulty: "easy",
+                description: "Check if a password meets security requirements: at least 8 characters, contains uppercase, lowercase, number, and special character.",
+                example: "Password: 'MyPass123!'\nOutput: Strong password ✓",
+                hint: "Use regular expressions or character checking to validate each requirement."
+            },
+            {
+                id: 7,
+                title: "Word Counter Tool",
+                category: "strings",
+                difficulty: "easy",
+                description: "Count words, characters, sentences, and paragraphs in a given text. Also find the most frequently used word.",
+                example: "Text: 'Hello world. Hello universe.'\nOutput: Words: 4, Characters: 28, Sentences: 2, Most frequent: 'Hello' (2 times)",
+                hint: "Split text by spaces for words, periods for sentences, and use an object to count word frequency."
+            },
+            {
+                id: 8,
+                title: "Email Validator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Validate email addresses and extract domain information. Check for common email providers.",
+                example: "Email: 'user@gmail.com'\nOutput: Valid ✓, Domain: gmail.com, Provider: Gmail",
+                hint: "Use regex for validation and string splitting to extract domain parts."
+            },
+            {
+                id: 9,
+                title: "Text Formatter",
+                category: "strings",
+                difficulty: "medium",
+                description: "Format text by converting to title case, removing extra spaces, and fixing punctuation spacing.",
+                example: "Input: 'hello    world.how are you?'\nOutput: 'Hello World. How Are You?'",
+                hint: "Use replace() with regex patterns and string methods for formatting."
+            },
+            {
+                id: 10,
+                title: "URL Slug Generator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Convert article titles into URL-friendly slugs by removing special characters and spaces.",
+                example: "Title: 'How to Learn JavaScript in 2025!'\nSlug: 'how-to-learn-javascript-in-2025'",
+                hint: "Convert to lowercase, replace spaces with dashes, and remove special characters."
+            },
+
+            // Math Category
+            {
+                id: 11,
+                title: "Tip Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate tip amount and total bill based on bill amount, tip percentage, and number of people splitting.",
+                example: "Bill: $45.50, Tip: 18%, People: 3\nOutput: Tip: $8.19, Total: $53.69, Per Person: $17.90",
+                hint: "Calculate tip as percentage of bill, add to get total, then divide by number of people."
+            },
+            {
+                id: 12,
+                title: "Compound Interest Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate compound interest for investments with different compounding frequencies.",
+                example: "Principal: $1000, Rate: 5%, Time: 3 years, Compounded: Annually\nOutput: Final Amount: $1157.63, Interest Earned: $157.63",
+                hint: "Use the compound interest formula: A = P(1 + r/n)^(nt)"
+            },
+            {
+                id: 13,
+                title: "Unit Converter",
+                category: "math",
+                difficulty: "easy",
+                description: "Convert between different units: temperature (C/F/K), length (m/ft/in), weight (kg/lb/oz).",
+                example: "Convert 100°F to Celsius\nOutput: 37.78°C",
+                hint: "Store conversion formulas and factors in objects for easy lookup."
+            },
+            {
+                id: 14,
+                title: "Geometry Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate area and perimeter for various shapes: rectangle, circle, triangle, trapezoid.",
+                example: "Circle with radius 5\nOutput: Area: 78.54, Circumference: 31.42",
+                hint: "Create functions for each shape using their respective formulas."
+            },
+            {
+                id: 15,
+                title: "Statistics Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate mean, median, mode, and standard deviation for a dataset.",
+                example: "Data: [2, 4, 4, 4, 5, 5, 7, 9]\nOutput: Mean: 5, Median: 4.5, Mode: 4, Std Dev: 2.14",
+                hint: "Sort array for median, count frequencies for mode, use standard deviation formula."
+            },
+
+            // Logic Category
+            {
+                id: 16,
+                title: "Traffic Light Simulator",
+                category: "logic",
+                difficulty: "easy",
+                description: "Simulate a traffic light system that cycles through green, yellow, and red with proper timing.",
+                example: "Current: Green (25s remaining)\nNext: Yellow → Red → Green",
+                hint: "Use setTimeout or setInterval to handle timing and state transitions."
+            },
+            {
+                id: 17,
+                title: "Voting System",
+                category: "logic",
+                difficulty: "medium",
+                description: "Create a voting system that tracks candidates, validates votes, and determines winners.",
+                example: "Candidates: [Alice, Bob, Charlie]\nVotes: [Alice, Alice, Bob, Charlie, Alice]\nWinner: Alice (3 votes)",
+                hint: "Use objects to count votes and find the candidate with maximum votes."
+            },
+            {
+                id: 18,
+                title: "Task Scheduler",
+                category: "logic",
+                difficulty: "medium",
+                description: "Schedule tasks with priorities and deadlines. Show which tasks are overdue or due soon.",
+                example: "Tasks: [{name: 'Report', priority: 'High', due: '2025-07-01'}]\nOutput: Due soon: Report (1 day left)",
+                hint: "Compare dates and sort by priority and due date."
+            },
+            {
+                id: 19,
+                title: "Decision Tree",
+                category: "logic",
+                difficulty: "medium",
+                description: "Create a decision tree for choosing what to wear based on weather conditions.",
+                example: "Weather: Rainy, Temp: 60°F\nRecommendation: Light jacket + Umbrella",
+                hint: "Use nested if-else statements or switch cases for different combinations."
+            },
+            {
+                id: 20,
+                title: "Logic Gate Simulator",
+                category: "logic",
+                difficulty: "hard",
+                description: "Simulate basic logic gates (AND, OR, NOT, XOR) and create simple circuits.",
+                example: "Input A: 1, Input B: 0\nAND Gate: 0, OR Gate: 1, XOR Gate: 1",
+                hint: "Create functions for each gate type and combine them for complex circuits."
+            },
+
+            // Games Category
+            {
+                id: 21,
+                title: "Dice Rolling Game",
+                category: "games",
+                difficulty: "easy",
+                description: "Create a dice game where players try to reach exactly 21 points without going over.",
+                example: "Player rolls: 4, 6, 5, 3, 2\nTotal: 20 (Safe), Next roll: 6 (Bust!)",
+                hint: "Use Math.random() for dice rolls and track running total."
+            },
+            {
+                id: 22,
+                title: "Number Guessing Game",
+                category: "games",
+                difficulty: "easy",
+                description: "Create a number guessing game with hints (higher/lower) and attempt counting.",
+                example: "Secret: 67, Guess: 50 → 'Higher', Guess: 75 → 'Lower', Guess: 67 → 'Correct! (3 attempts)'",
+                hint: "Generate random number and compare with user guesses."
+            },
+            {
+                id: 23,
+                title: "Rock Paper Scissors Tournament",
+                category: "games",
+                difficulty: "medium",
+                description: "Create a tournament-style Rock Paper Scissors game with multiple rounds and scoring.",
+                example: "Round 1: Player (Rock) vs Computer (Scissors) → Player wins!\nScore: Player 1 - Computer 0",
+                hint: "Create choice comparison logic and track scores across rounds."
+            },
+            {
+                id: 24,
+                title: "Word Scramble Game",
+                category: "games",
+                difficulty: "medium",
+                description: "Scramble words from different categories and let players guess the original word.",
+                example: "Category: Animals, Scrambled: 'LEPAHNET'\nAnswer: ELEPHANT",
+                hint: "Shuffle array of characters and provide category hints."
+            },
+            {
+                id: 25,
+                title: "Memory Card Game",
+                category: "games",
+                difficulty: "hard",
+                description: "Create a memory game where players flip cards to find matching pairs.",
+                example: "Grid: 4x4, Cards: 8 pairs\nFlip (1,1): A, Flip (2,3): B → No match, cards flip back",
+                hint: "Use 2D array for grid and track flipped cards and matches."
+            },
+
+            // Additional Problems (continuing with more creative and practical examples)
+            {
+                id: 26,
+                title: "Recipe Scaler",
+                category: "math",
+                difficulty: "easy",
+                description: "Scale recipe ingredients up or down based on serving size changes.",
+                example: "Original: 4 servings, Need: 6 servings\nFlour: 2 cups → 3 cups, Salt: 1 tsp → 1.5 tsp",
+                hint: "Calculate scaling ratio and multiply each ingredient amount."
+            },
+            {
+                id: 27,
+                title: "Parking Meter Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate parking fees based on time parked and hourly rates with different zones.",
+                example: "Zone A: $2/hour, Parked: 2.5 hours\nTotal: $5.00",
+                hint: "Handle partial hours by rounding up to nearest increment."
+            },
+            {
+                id: 28,
+                title: "Book Library System",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Manage a library system with book checkout, return, and availability tracking.",
+                example: "Books: [{title: 'Book1', available: true, dueDate: null}]\nCheckout 'Book1' → available: false, dueDate: '2025-07-14'",
+                hint: "Update book status and calculate due dates based on checkout date."
+            },
+            {
+                id: 29,
+                title: "Color Palette Generator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Generate complementary color palettes and convert between color formats (HEX, RGB, HSL).",
+                example: "Base Color: #FF5733\nComplementary: #33FFCB, Analogous: #FF8F33, #FF3357",
+                hint: "Use color theory rules and conversion formulas between color spaces."
+            },
+            {
+                id: 30,
+                title: "Expense Tracker",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track personal expenses by category, find spending patterns, and budget warnings.",
+                example: "Expenses: [{category: 'Food', amount: 45.50, date: '2025-06-28'}]\nMonthly Food Budget: $200, Spent: $145.50, Remaining: $54.50",
+                hint: "Group expenses by category and date, compare with budget limits."
+            },
+
+            // Continue with more problems...
+            {
+                id: 31,
+                title: "Weather Forecast Parser",
+                category: "strings",
+                difficulty: "medium",
+                description: "Parse weather data strings and extract temperature, conditions, and generate weather alerts.",
+                example: "Data: 'Sunny, 85°F, Humidity: 60%, Wind: 10mph'\nAlert: Heat advisory - temperature above 80°F",
+                hint: "Use string methods and regex to extract numerical and text data."
+            },
+            {
+                id: 32,
+                title: "Playlist Duration Calculator",
+                category: "arrays",
+                difficulty: "easy",
+                description: "Calculate total playlist duration and find longest/shortest songs.",
+                example: "Songs: [{'title': 'Song1', 'duration': '3:45'}, {'title': 'Song2', 'duration': '4:20'}]\nTotal: 8:05, Longest: Song2 (4:20)",
+                hint: "Convert time strings to seconds for calculations, then convert back."
+            },
+            {
+                id: 33,
+                title: "QR Code Data Extractor",
+                category: "strings",
+                difficulty: "hard",
+                description: "Extract and validate different types of data from QR code strings (URLs, WiFi, contacts).",
+                example: "QR Data: 'WIFI:T:WPA;S:MyNetwork;P:password123;;'\nType: WiFi, Network: MyNetwork, Security: WPA",
+                hint: "Parse structured data formats and identify data types by patterns."
+            },
+            {
+                id: 34,
+                title: "Fitness Goal Tracker",
+                category: "math",
+                difficulty: "medium",
+                description: "Track fitness goals like steps, calories, and workout minutes with progress calculation.",
+                example: "Daily Goal: 10,000 steps, Current: 7,500\nProgress: 75%, Remaining: 2,500 steps",
+                hint: "Calculate percentages and remaining amounts for different metrics."
+            },
+            {
+                id: 35,
+                title: "Social Media Handle Validator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Validate social media usernames for different platforms with their specific rules.",
+                example: "Username: 'cool_user123' for Twitter\nValid ✓ (3-15 chars, alphanumeric + underscore)",
+                hint: "Different platforms have different character limits and allowed characters."
+            },
+
+            // Logic and Algorithm Problems
+            {
+                id: 36,
+                title: "Elevator Controller",
+                category: "logic",
+                difficulty: "hard",
+                description: "Simulate elevator logic with multiple floors, direction optimization, and passenger pickup.",
+                example: "Current: Floor 3, Requests: [1, 5, 7], Direction: Up\nNext stops: 5, 7, then 1",
+                hint: "Optimize elevator movement to minimize total travel time."
+            },
+            {
+                id: 37,
+                title: "Appointment Scheduler",
+                category: "logic",
+                difficulty: "medium",
+                description: "Schedule appointments avoiding conflicts and suggesting alternative times.",
+                example: "New: 2:00-3:00 PM, Existing: 2:30-4:00 PM\nConflict! Suggest: 1:00-2:00 PM or 4:00-5:00 PM",
+                hint: "Check time overlaps and find available slots."
+            },
+            {
+                id: 38,
+                title: "Smart Home Controller",
+                category: "logic",
+                difficulty: "hard",
+                description: "Control smart home devices based on time, occupancy, and user preferences.",
+                example: "6:00 AM: Turn on lights (30%), Start coffee maker\n10:00 PM: Lock doors, Set thermostat to 68°F",
+                hint: "Use time conditions and device state management."
+            },
+            {
+                id: 39,
+                title: "Recipe Nutrition Calculator",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Calculate total nutrition facts for recipes based on ingredient quantities.",
+                example: "Ingredients: [{name: 'Chicken', qty: 200, calories_per_100g: 165}]\nTotal: 330 calories, 62g protein",
+                hint: "Scale nutrition values based on quantities and sum totals."
+            },
+            {
+                id: 40,
+                title: "Password Generator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Generate secure passwords with customizable length, character sets, and complexity rules.",
+                example: "Length: 12, Include: uppercase, numbers, symbols\nGenerated: 'K9#mP2$nQ8@x'",
+                hint: "Use random selection from different character sets."
+            },
+            {
+                id: 41,
+                title: "File Size Converter",
+                category: "math",
+                difficulty: "easy",
+                description: "Convert file sizes between different units (bytes, KB, MB, GB, TB).",
+                example: "Input: 1536 MB\nOutput: 1.5 GB, 1536000 KB, 1610612736 bytes",
+                hint: "Use powers of 1024 for binary conversion or 1000 for decimal."
+            },
+            {
+                id: 42,
+                title: "Morse Code Translator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Convert text to Morse code and vice versa with audio timing suggestions.",
+                example: "Text: 'HELLO'\nMorse: '.... . .-.. .-.. ---'",
+                hint: "Use lookup table for character to Morse code mapping."
+            },
+            {
+                id: 43,
+                title: "Sudoku Validator",
+                category: "logic",
+                difficulty: "hard",
+                description: "Validate if a completed Sudoku puzzle follows all the rules.",
+                example: "9x9 grid validation\nCheck: rows, columns, and 3x3 boxes contain digits 1-9",
+                hint: "Check each row, column, and 3x3 box for duplicate numbers."
+            },
+            {
+                id: 44,
+                title: "Time Zone Converter",
+                category: "math",
+                difficulty: "medium",
+                description: "Convert times between different time zones accounting for daylight saving.",
+                example: "3:00 PM EST → 12:00 PM PST, 8:00 PM GMT",
+                hint: "Store timezone offsets and handle daylight saving transitions."
+            },
+            {
+                id: 45,
+                title: "Grade Point Average Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate GPA from courses with different credit hours and letter grades.",
+                example: "Courses: [{grade: 'A', credits: 3}, {grade: 'B+', credits: 4}]\nGPA: 3.71",
+                hint: "Convert letter grades to points, multiply by credits, divide by total credits."
+            },
+            {
+                id: 46,
+                title: "Basketball Score Tracker",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track basketball game statistics including player scores, fouls, and game events.",
+                example: "Players: [{name: 'Player1', points: 18, fouls: 2, assists: 5}]\nTeam Total: 89 points",
+                hint: "Aggregate individual player statistics for team totals."
+            },
+            {
+                id: 47,
+                title: "License Plate Generator",
+                category: "strings",
+                difficulty: "easy",
+                description: "Generate license plates following different state format patterns.",
+                example: "California format: 1ABC234\nTexas format: ABC-1234",
+                hint: "Use templates with placeholders for letters and numbers."
+            },
+            {
+                id: 48,
+                title: "Calorie Burn Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate calories burned for different activities based on weight, duration, and intensity.",
+                example: "Activity: Running, Weight: 150 lbs, Duration: 30 min\nCalories burned: 295",
+                hint: "Use MET (Metabolic Equivalent) values for different activities."
+            },
+            {
+                id: 49,
+                title: "Binary Code Translator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Convert text to binary and binary to text with proper formatting.",
+                example: "Text: 'Hi'\nBinary: '01001000 01101001'",
+                hint: "Use ASCII values and binary conversion methods."
+            },
+            {
+                id: 50,
+                title: "Pizza Order Calculator",
+                category: "arrays",
+                difficulty: "easy",
+                description: "Calculate pizza order totals with different sizes, toppings, and delivery fees.",
+                example: "Large Pizza ($15) + 3 toppings ($2 each) + delivery ($3)\nTotal: $24",
+                hint: "Add base price, toppings cost, and additional fees."
+            },
+            {
+                id: 51,
+                title: "Roman Numeral Converter",
+                category: "strings",
+                difficulty: "medium",
+                description: "Convert numbers to Roman numerals and Roman numerals back to numbers.",
+                example: "Number: 1994\nRoman: MCMXCIV",
+                hint: "Use mapping of values and handle subtractive notation (IV, IX, etc.)."
+            },
+            {
+                id: 52,
+                title: "Loan Payment Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate monthly loan payments, total interest, and payment schedules.",
+                example: "Loan: $10,000, Rate: 5%, Term: 2 years\nMonthly Payment: $438.71, Total Interest: $528.91",
+                hint: "Use loan payment formula with principal, rate, and term."
+            },
+            {
+                id: 53,
+                title: "Phone Number Formatter",
+                category: "strings",
+                difficulty: "easy",
+                description: "Format phone numbers into standard formats and validate country codes.",
+                example: "Input: '1234567890'\nFormatted: '(123) 456-7890', '+1-123-456-7890'",
+                hint: "Use string slicing and formatting templates."
+            },
+            {
+                id: 54,
+                title: "Bingo Card Generator",
+                category: "games",
+                difficulty: "medium",
+                description: "Generate random bingo cards following traditional B-I-N-G-O number ranges.",
+                example: "B: 1-15, I: 16-30, N: 31-45, G: 46-60, O: 61-75\nGenerate 5x5 card with FREE space",
+                hint: "Use ranges for each column and ensure no duplicate numbers."
+            },
+            {
+                id: 55,
+                title: "Color Blindness Simulator",
+                category: "strings",
+                difficulty: "hard",
+                description: "Simulate how colors appear to people with different types of color blindness.",
+                example: "Color: #FF0000 (Red)\nProtanopia: #B87A00, Deuteranopia: #C4A000",
+                hint: "Apply color transformation matrices for different color blindness types."
+            },
+            {
+                id: 56,
+                title: "Workout Rep Counter",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track workout sets, reps, and weights with progress comparison.",
+                example: "Exercise: Bench Press\nSets: [{reps: 10, weight: 135}, {reps: 8, weight: 145}]\nTotal Volume: 2510 lbs",
+                hint: "Calculate volume (reps × weight) for each set and sum totals."
+            },
+            {
+                id: 57,
+                title: "HTML Tag Validator",
+                category: "strings",
+                difficulty: "hard",
+                description: "Validate HTML by checking if opening and closing tags are properly matched.",
+                example: "HTML: '<div><p>Hello</p></div>'\nValid ✓ - All tags properly closed",
+                hint: "Use stack data structure to match opening and closing tags."
+            },
+            {
+                id: 58,
+                title: "Speed Reading Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate reading speed (WPM) and estimated reading time for texts.",
+                example: "Text: 250 words, Time: 2 minutes\nReading Speed: 125 WPM",
+                hint: "Words per minute = total words ÷ time in minutes."
+            },
+            {
+                id: 59,
+                title: "Basketball Shot Chart",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track basketball shots by location and calculate shooting percentages by zone.",
+                example: "Shots: [{x: 10, y: 15, made: true, zone: '3-point'}]\n3-point percentage: 40% (4/10)",
+                hint: "Group shots by zone and calculate make percentage for each."
+            },
+            {
+                id: 60,
+                title: "Crossword Clue Generator",
+                category: "strings",
+                difficulty: "hard",
+                description: "Generate crossword clues based on word patterns and letter constraints.",
+                example: "Word: 'CAT', Pattern: 'C_T'\nClue: 'Feline pet (3 letters)'",
+                hint: "Check word patterns and generate appropriate difficulty clues."
+            },
+            {
+                id: 61,
+                title: "Stock Portfolio Tracker",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track stock investments, calculate gains/losses, and portfolio performance.",
+                example: "Stocks: [{symbol: 'AAPL', shares: 10, buyPrice: 150, currentPrice: 175}]\nGain: $250 (16.67%)",
+                hint: "Calculate current value vs purchase price for each holding."
+            },
+            {
+                id: 62,
+                title: "Anagram Detector",
+                category: "strings",
+                difficulty: "medium",
+                description: "Check if two words are anagrams and find all anagrams in a word list.",
+                example: "Words: 'listen' and 'silent'\nResult: Anagrams ✓",
+                hint: "Sort characters in both words and compare, or count character frequencies."
+            },
+            {
+                id: 63,
+                title: "Timezone Meeting Planner",
+                category: "logic",
+                difficulty: "hard",
+                description: "Find optimal meeting times across multiple time zones for global teams.",
+                example: "Team: NYC (EST), London (GMT), Tokyo (JST)\nBest time: 9 AM EST = 2 PM GMT = 11 PM JST",
+                hint: "Find overlapping business hours across all time zones."
+            },
+            {
+                id: 64,
+                title: "Batting Average Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate baseball statistics including batting average, slugging percentage, and OPS.",
+                example: "At-bats: 100, Hits: 30, Doubles: 5, Triples: 1, Home runs: 4\nAverage: .300, Slugging: .450",
+                hint: "Batting average = hits ÷ at-bats, slugging = total bases ÷ at-bats."
+            },
+            {
+                id: 65,
+                title: "Markdown to HTML Converter",
+                category: "strings",
+                difficulty: "hard",
+                description: "Convert basic Markdown syntax to HTML tags (headers, bold, italic, links).",
+                example: "Markdown: '# Hello **world**'\nHTML: '<h1>Hello <strong>world</strong></h1>'",
+                hint: "Use regular expressions to find and replace Markdown patterns."
+            },
+            {
+                id: 66,
+                title: "School Bell Schedule",
+                category: "logic",
+                difficulty: "medium",
+                description: "Create a school bell schedule system that shows current period and time remaining.",
+                example: "Current time: 10:30 AM\nPeriod 2: Math (20 minutes remaining)\nNext: Period 3 - Science at 10:50 AM",
+                hint: "Compare current time with schedule periods and calculate differences."
+            },
+            {
+                id: 67,
+                title: "Caesar Cipher Encoder",
+                category: "strings",
+                difficulty: "medium",
+                description: "Encode and decode messages using Caesar cipher with custom shift values.",
+                example: "Message: 'HELLO', Shift: 3\nEncoded: 'KHOOR'",
+                hint: "Shift each letter by the specified amount, wrapping around the alphabet."
+            },
+            {
+                id: 68,
+                title: "Fuel Efficiency Calculator",
+                category: "math",
+                difficulty: "easy",
+                description: "Calculate MPG, fuel costs, and CO2 emissions for vehicle trips.",
+                example: "Distance: 300 miles, Fuel used: 12 gallons, Price: $3.50/gal\nMPG: 25, Cost: $42, CO2: 240 lbs",
+                hint: "MPG = distance ÷ fuel used, emissions = fuel × CO2 factor."
+            },
+            {
+                id: 69,
+                title: "Slot Machine Simulator",
+                category: "games",
+                difficulty: "medium",
+                description: "Simulate slot machine with different symbols, paylines, and payout calculations.",
+                example: "Reels: [🍒, 🍒, 🍒] → JACKPOT! × 100 payout\nReels: [🍋, 🍒, 🍊] → No match",
+                hint: "Generate random symbols and check for winning combinations."
+            },
+            {
+                id: 70,
+                title: "Recipe Substitution Helper",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Suggest ingredient substitutions for recipes based on dietary restrictions or availability.",
+                example: "Need: 1 cup butter, Restriction: Vegan\nSubstitute: 1 cup vegan butter or ¾ cup coconut oil",
+                hint: "Maintain database of substitutions with conversion ratios."
+            },
+            {
+                id: 71,
+                title: "WiFi Password Generator",
+                category: "strings",
+                difficulty: "easy",
+                description: "Generate secure WiFi passwords with pronounceable options and strength indicators.",
+                example: "Type: Random → 'K9#mP2$nQ8@x' (Very Strong)\nType: Pronounceable → 'BlueCat42!' (Strong)",
+                hint: "Combine random characters or use word lists with numbers/symbols."
+            },
+            {
+                id: 72,
+                title: "Blood Pressure Monitor",
+                category: "logic",
+                difficulty: "medium",
+                description: "Track blood pressure readings and categorize them according to medical guidelines.",
+                example: "Reading: 130/85 mmHg\nCategory: Stage 1 Hypertension\nRecommendation: Consult physician",
+                hint: "Use BP ranges to categorize readings and provide appropriate alerts."
+            },
+            {
+                id: 73,
+                title: "Rubik's Cube Timer",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Time Rubik's cube solves, calculate averages, and track personal records.",
+                example: "Solves: [45.2s, 52.1s, 38.9s, 44.3s, 41.7s]\nAverage of 5: 43.7s, Best: 38.9s",
+                hint: "Store solve times, calculate averages excluding best/worst for official timing."
+            },
+            {
+                id: 74,
+                title: "Text Encryption Tool",
+                category: "strings",
+                difficulty: "hard",
+                description: "Encrypt and decrypt text using various methods (ROT13, substitution, Vigenère).",
+                example: "Text: 'SECRET', Method: ROT13\nEncrypted: 'FRPERG'",
+                hint: "Implement multiple cipher algorithms with key management."
+            },
+            {
+                id: 75,
+                title: "Solar Panel Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate solar panel energy production, savings, and payback period.",
+                example: "System: 5kW, Sun hours: 5/day, Rate: $0.12/kWh\nDaily production: 25kWh, Monthly savings: $90",
+                hint: "Calculate energy production based on system size and available sunlight."
+            },
+            {
+                id: 76,
+                title: "Chess Move Validator",
+                category: "logic",
+                difficulty: "hard",
+                description: "Validate chess moves according to piece movement rules and board state.",
+                example: "Move: Queen from e1 to e8\nValid ✓ (clear path), Invalid ✗ (piece blocking)",
+                hint: "Check piece-specific movement patterns and path obstacles."
+            },
+            {
+                id: 77,
+                title: "Habit Tracker",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track daily habits, calculate streaks, and provide motivation statistics.",
+                example: "Habit: Exercise\nCurrent streak: 7 days, Longest streak: 21 days, Completion rate: 85%",
+                hint: "Track daily completions and calculate consecutive day counts."
+            },
+            {
+                id: 78,
+                title: "Karaoke Score Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Score karaoke performances based on pitch accuracy, timing, and style.",
+                example: "Pitch: 85%, Timing: 90%, Style: 75%\nOverall Score: 83% - Great Performance!",
+                hint: "Weight different aspects and combine for overall score."
+            },
+            {
+                id: 79,
+                title: "Comic Book Collection Manager",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Manage comic book collection with issue tracking, condition, and value estimation.",
+                example: "Comic: Amazing Spider-Man #1, Condition: Fine, Year: 1963\nEstimated Value: $12,000",
+                hint: "Track condition grades and use lookup tables for value estimation."
+            },
+            {
+                id: 80,
+                title: "Escape Room Timer",
+                category: "logic",
+                difficulty: "medium",
+                description: "Create escape room timer with puzzle tracking, hints system, and success tracking.",
+                example: "Room: Mystery Mansion, Time: 45:00, Puzzles solved: 3/5\nHints used: 1, Time remaining: 12:30",
+                hint: "Track multiple timers and puzzle states simultaneously."
+            },
+            {
+                id: 81,
+                title: "Plant Watering Scheduler",
+                category: "logic",
+                difficulty: "medium",
+                description: "Schedule plant watering based on plant types, seasons, and environmental factors.",
+                example: "Plant: Succulent, Last watered: 5 days ago\nNext watering: Tomorrow, Frequency: Weekly",
+                hint: "Different plants have different watering needs and seasonal variations."
+            },
+            {
+                id: 82,
+                title: "Lottery Number Generator",
+                category: "games",
+                difficulty: "easy",
+                description: "Generate lottery numbers for different games with no repeats and lucky number options.",
+                example: "Powerball: 5 numbers (1-69) + Powerball (1-26)\nNumbers: 7, 23, 34, 45, 67 + PB: 12",
+                hint: "Generate unique random numbers within specified ranges."
+            },
+            {
+                id: 83,
+                title: "Dream Journal Analyzer",
+                category: "strings",
+                difficulty: "medium",
+                description: "Analyze dream journal entries for common themes, emotions, and recurring elements.",
+                example: "Entry: 'Flying over mountains feeling free'\nThemes: Flying (freedom), Nature, Positive emotions",
+                hint: "Use word frequency analysis and emotion detection keywords."
+            },
+            {
+                id: 84,
+                title: "Magic 8-Ball Simulator",
+                category: "games",
+                difficulty: "easy",
+                description: "Create digital Magic 8-Ball with custom responses and shake animation effects.",
+                example: "Question: 'Will it rain tomorrow?'\nAnswer: 'Signs point to yes' 🎱",
+                hint: "Store array of responses and select randomly with animation timing."
+            },
+            {
+                id: 85,
+                title: "Retirement Savings Calculator",
+                category: "math",
+                difficulty: "medium",
+                description: "Calculate retirement savings growth with compound interest and inflation adjustments.",
+                example: "Monthly: $500, Years: 30, Return: 7%, Inflation: 3%\nFuture value: $566,764 (today's buying power: $233,971)",
+                hint: "Apply compound interest formula and adjust for inflation impact."
+            },
+            {
+                id: 86,
+                title: "Mood Ring Color Interpreter",
+                category: "strings",
+                difficulty: "easy",
+                description: "Interpret mood ring colors and provide personality insights based on color psychology.",
+                example: "Color: Blue\nMood: Calm and relaxed, Feeling content and peaceful",
+                hint: "Map colors to emotional states using color psychology principles."
+            },
+            {
+                id: 87,
+                title: "Dungeons & Dragons Dice Roller",
+                category: "games",
+                difficulty: "medium",
+                description: "Roll various D&D dice combinations with modifiers and advantage/disadvantage rules.",
+                example: "Roll: 2d6+3 with advantage\nRolls: [4,2] and [6,1] → Take higher: [6,1] + 3 = 10",
+                hint: "Parse dice notation and implement advantage (roll twice, take higher) rules."
+            },
+            {
+                id: 88,
+                title: "Meditation Timer",
+                category: "logic",
+                difficulty: "medium",
+                description: "Create meditation timer with interval bells, breathing guides, and session tracking.",
+                example: "Session: 20 minutes, Bell intervals: 5 minutes\nBreathing: 4 counts in, 4 counts out",
+                hint: "Use multiple timers for main session and interval notifications."
+            },
+            {
+                id: 89,
+                title: "Photo Metadata Extractor",
+                category: "strings",
+                difficulty: "hard",
+                description: "Extract and display photo metadata including EXIF data, location, and camera settings.",
+                example: "Photo: IMG_001.jpg\nCamera: Canon EOS, Date: 2025-06-30, Location: 40.7128°N, 74.0060°W",
+                hint: "Parse EXIF data structure and convert technical values to readable format."
+            },
+            {
+                id: 90,
+                title: "Virtual Pet Simulator",
+                category: "games",
+                difficulty: "hard",
+                description: "Create virtual pet with hunger, happiness, health stats that change over time.",
+                example: "Pet: Fluffy the Cat\nHunger: 30%, Happiness: 85%, Health: 95%\nAction needed: Feed pet soon!",
+                hint: "Use timers to decrease stats over time and provide care actions."
+            },
+            {
+                id: 91,
+                title: "Wedding Budget Planner",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Plan wedding budget across categories with vendor comparisons and expense tracking.",
+                example: "Budget: $25,000\nVenue: $8,000 (32%), Catering: $7,500 (30%), Remaining: $4,200",
+                hint: "Track expenses by category and calculate percentages of total budget."
+            },
+            {
+                id: 92,
+                title: "Constellation Finder",
+                category: "math",
+                difficulty: "hard",
+                description: "Find visible constellations based on location, date, and time with star positions.",
+                example: "Location: NYC, Date: June 30, Time: 10 PM\nVisible: Ursa Major, Cassiopeia, Cygnus",
+                hint: "Use astronomical calculations for star positions and visibility."
+            },
+            {
+                id: 93,
+                title: "Typing Speed Test",
+                category: "strings",
+                difficulty: "medium",
+                description: "Create typing test with WPM calculation, accuracy tracking, and error analysis.",
+                example: "Text typed in 60 seconds: 240 characters (48 words)\nWPM: 48, Accuracy: 96%, Errors: 2",
+                hint: "Track keystrokes, timing, and compare input with target text."
+            },
+            {
+                id: 94,
+                title: "Recipe Scaling Tool",
+                category: "math",
+                difficulty: "easy",
+                description: "Scale recipe ingredients for different serving sizes with unit conversions.",
+                example: "Original: 4 servings, Scale to: 6 servings\n2 cups flour → 3 cups flour, 1 tsp salt → 1.5 tsp salt",
+                hint: "Calculate scaling ratio and apply to all ingredient quantities."
+            },
+            {
+                id: 95,
+                title: "Language Learning Flashcards",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Create flashcard system with spaced repetition and difficulty adjustment.",
+                example: "Card: 'Hola' → 'Hello'\nStreak: 3 correct, Next review: 2 days, Difficulty: Easy",
+                hint: "Implement spaced repetition algorithm based on performance."
+            },
+            {
+                id: 96,
+                title: "Treasure Hunt Clue Generator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Generate treasure hunt clues with riddles, coordinates, and difficulty levels.",
+                example: "Location: Kitchen\nClue: 'Where food stays cold and fresh, look behind what keeps the mess'",
+                hint: "Create templates for different clue types and location categories."
+            },
+            {
+                id: 97,
+                title: "Pet Care Reminder",
+                category: "logic",
+                difficulty: "medium",
+                description: "Track pet care tasks like feeding, walking, grooming with reminder schedules.",
+                example: "Pet: Max (Dog)\nNext feeding: 2 hours, Last walk: 4 hours ago, Grooming due: Tomorrow",
+                hint: "Calculate time differences and check against care schedules."
+            },
+            {
+                id: 98,
+                title: "Color Mixing Simulator",
+                category: "strings",
+                difficulty: "medium",
+                description: "Simulate paint color mixing with RGB/HSV color models and mixing ratios.",
+                example: "Mix: Red (50%) + Blue (50%)\nResult: Purple (#800080), RGB(128, 0, 128)",
+                hint: "Average RGB values based on mixing ratios for color combinations."
+            },
+            {
+                id: 99,
+                title: "Birthday Reminder System",
+                category: "logic",
+                difficulty: "medium",
+                description: "Track birthdays and calculate ages, zodiac signs, and upcoming birthday alerts.",
+                example: "Contact: Alice, DOB: 1995-07-15\nAge: 29, Zodiac: Cancer, Birthday in: 15 days",
+                hint: "Calculate date differences and use birth date ranges for zodiac signs."
+            },
+            {
+                id: 100,
+                title: "Home Energy Monitor",
+                category: "math",
+                difficulty: "medium",
+                description: "Monitor home energy usage, calculate costs, and suggest energy-saving tips.",
+                example: "Daily usage: 45 kWh, Rate: $0.12/kWh\nDaily cost: $5.40, Monthly estimate: $162",
+                hint: "Track usage patterns and calculate costs based on utility rates."
+            },
+            {
+                id: 101,
+                title: "Garden Planning Tool",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Plan garden layout with plant spacing, companion planting, and harvest scheduling.",
+                example: "Plot: 10x10 ft, Plants: Tomatoes, Basil, Carrots\nSpacing: Tomatoes 2ft apart, Basil companion to tomatoes",
+                hint: "Check plant compatibility and calculate spacing requirements."
+            },
+            {
+                id: 102,
+                title: "Trivia Question Generator",
+                category: "games",
+                difficulty: "medium",
+                description: "Generate trivia questions from different categories with multiple choice answers.",
+                example: "Category: Science\nQ: What is the chemical symbol for gold?\nA) Au B) Ag C) Fe D) Cu → Answer: A",
+                hint: "Store questions by category and randomize answer order."
+            },
+            {
+                id: 103,
+                title: "Sleep Quality Tracker",
+                category: "arrays",
+                difficulty: "medium",
+                description: "Track sleep patterns, calculate sleep debt, and provide sleep quality insights.",
+                example: "Last night: 6.5 hours, Goal: 8 hours\nSleep debt: 1.5 hours, Weekly average: 7.2 hours",
+                hint: "Track sleep duration and compare against recommended amounts."
+            },
+            {
+                id: 104,
+                title: "Digital Cookbook",
+                category: "arrays",
+                difficulty: "hard",
+                description: "Organize recipes with search, nutrition facts, meal planning, and shopping lists.",
+                example: "Recipe: Pasta Carbonara\nCalories: 520/serving, Cook time: 15 min, Ingredients: 6 items",
+                hint: "Implement search functionality and generate shopping lists from selected recipes."
+            },
+            {
+                id: 105,
+                title: "Weather Station Dashboard",
+                category: "math",
+                difficulty: "hard",
+                description: "Display weather data with trends, alerts, and forecasting based on historical patterns.",
+                example: "Current: 75°F, Humidity: 60%, Pressure: 30.15 inHg\nTrend: Rising pressure, Fair weather expected",
+                hint: "Analyze pressure trends and humidity patterns for weather prediction."
+            }
+        ];
+
+        // State management
+        let currentPage = 1;
+        const problemsPerPage = 10;
+        let filteredProblems = [...problems];
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        // Initialize the application
+        $(document).ready(function() {
+            renderProblems();
+            renderPagination();
+            bindEvents();
+        });
+
+        function bindEvents() {
+            // Filter buttons
+            $('.filter-btn').click(function() {
+                $('.filter-btn').removeClass('active');
+                                $(this).addClass('active');
+                currentCategory = $(this).data('category');
+                currentPage = 1;
+                filterProblems();
+                renderProblems();
+                renderPagination();
+            });
+
+            // Search input
+            $('#searchInput').on('input', function() {
+                searchTerm = $(this).val().toLowerCase();
+                currentPage = 1;
+                filterProblems();
+                renderProblems();
+                renderPagination();
+            });
+
+            // Hint toggles will be handled when rendering problems
+        }
+
+        function filterProblems() {
+            filteredProblems = problems.filter(problem => {
+                const matchesCategory = currentCategory === 'all' || problem.category === currentCategory;
+                const matchesSearch = problem.title.toLowerCase().includes(searchTerm) || 
+                                    problem.description.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+        }
+
+        function renderProblems() {
+            const startIndex = (currentPage - 1) * problemsPerPage;
+            const endIndex = startIndex + problemsPerPage;
+            const problemsToShow = filteredProblems.slice(startIndex, endIndex);
+
+            const problemsList = $('#problemsList');
+            problemsList.empty();
+
+            if (problemsToShow.length === 0) {
+                problemsList.html(`
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x mb-3" style="color: #6c757d;"></i>
+                        <h3>No problems found</h3>
+                        <p>Try adjusting your filters or search term</p>
+                    </div>
+                `);
+                return;
+            }
+
+            problemsToShow.forEach(problem => {
+                const difficultyClass = `difficulty-${problem.difficulty}`;
+                
+                const problemCard = $(`
+                    <div class="col-12 problem-card" data-category="${problem.category}" data-difficulty="${problem.difficulty}">
+                        <div class="problem-header d-flex justify-content-between align-items-center">
+                            <h3 class="problem-title">${problem.title}</h3>
+                            <span class="meta-tag ${difficultyClass}">${problem.difficulty}</span>
+                        </div>
+                        <div class="problem-meta">
+                            <span class="meta-tag">${problem.category}</span>
+                            <span class="meta-tag">#${problem.id}</span>
+                        </div>
+                        <p class="problem-description">${problem.description}</p>
+                        <div class="problem-example">
+                            <strong>Example:</strong><br>
+                            ${problem.example.replace(/\n/g, '<br>')}
+                        </div>
+                        <div class="hint-section" id="hint-${problem.id}">
+                            <strong>Hint:</strong><br>
+                            ${problem.hint}
+                        </div>
+                        <div class="problem-actions">
+                            <a class="btn btn-primary" href = "about.html#ai" target = "_blank">Ask AI </a>
+                            <button class="btn btn-outline-secondary hint-btn" data-problem="${problem.id}">
+                                <i class="fas fa-lightbulb"></i> Show Hint
+                            </button>
+                        </div>
+                    </div>
+                `);
+
+                problemsList.append(problemCard);
+            });
+
+            // Bind hint toggle events
+            $('.hint-btn').click(function() {
+                const problemId = $(this).data('problem');
+                const hintSection = $(`#hint-${problemId}`);
+                const isVisible = hintSection.hasClass('show');
+                
+                if (isVisible) {
+                    hintSection.removeClass('show');
+                    $(this).html('<i class="fas fa-lightbulb"></i> Show Hint');
+                } else {
+                    hintSection.addClass('show');
+                    $(this).html('<i class="fas fa-eye-slash"></i> Hide Hint');
+                }
+            });
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredProblems.length / problemsPerPage);
+            const pagination = $('#pagination');
+            pagination.empty();
+
+            if (totalPages <= 1) return;
+
+            // Previous button
+            pagination.append(`
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage - 1}">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            `);
+
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            if (startPage > 1) {
+                pagination.append(`
+                    <li class="page-item">
+                        <a class="page-link" href="#" data-page="1">1</a>
+                    </li>
+                    ${startPage > 2 ? '<li class="page-item disabled"><span class="page-link">...</span></li>' : ''}
+                `);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                pagination.append(`
+                    <li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" data-page="${i}">${i}</a>
+                    </li>
+                `);
+            }
+
+            if (endPage < totalPages) {
+                pagination.append(`
+                    ${endPage < totalPages - 1 ? '<li class="page-item disabled"><span class="page-link">...</span></li>' : ''}
+                    <li class="page-item">
+                        <a class="page-link" href="#" data-page="${totalPages}">${totalPages}</a>
+                    </li>
+                `);
+            }
+
+            // Next button
+            pagination.append(`
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage + 1}">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            `);
+
+            // Bind page click events
+            $('.page-link').click(function(e) {
+                e.preventDefault();
+                const page = $(this).data('page');
+                if (page && page !== currentPage) {
+                    currentPage = page;
+                    renderProblems();
+                    renderPagination();
+                    // Scroll to top of problems section
+                    $('html, body').animate({
+                        scrollTop: $('#problems').offset().top - 20
+                    }, 200);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

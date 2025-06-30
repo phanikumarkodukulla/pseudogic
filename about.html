@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Info</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400&display=swap" rel="stylesheet">
+       <link rel="icon" type="image/png" sizes="32x32" href="code.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="code.png">
+
+    <style>
+        /* Custom styles to ensure "Inter" font is applied */
+        body {
+           font-family: 'Product Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full text-center">
+        <!-- Title/Main Text -->
+        <h1 class="text-2xl font-semibold text-gray-800 mb-4">
+            Pseudogic | Problem Solving
+        </h1>
+        <p class="text-lg text-gray-600 mb-6">
+            A Phani Kumar's Innovation
+        </p>
+
+        <div class="flex flex-col space-y-4 mb-8">
+            <!-- Portfolio Link -->
+            <a href="https://phanikumar-kodukulla.vercel.app" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg  shadow-md">
+                <i class="fas fa-globe mr-3"></i>
+                My Portfolio
+            </a>
+
+            <!-- Contact Link (Mailto) -->
+            <a href="mailto:phanikumar.k2003@example.com"
+               class="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-6 rounded-lg shadow-md">
+                <i class="fas fa-envelope mr-3"></i>
+                Contact Me
+            </a>
+        </div>
+
+        <!-- Gemini API Feature: Tech Concept Explainer -->
+        <div class="border-t border-gray-200 pt-8 mt-8 text-left" id = "ai">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">
+                ✨ Pseudogic | AI ✨
+            </h2>
+            <p class="text-gray-600 mb-4 text-center">
+                Ask Gemini to explain any programming or tech concept!
+            </p>
+            <textarea id="conceptInput" rows="3" placeholder="e.g., Explain 'Closure' in JavaScript"
+                      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 resize-y"></textarea>
+            <button id="explainButton"
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg  shadow-md flex items-center justify-center">
+                <i class="fas fa-magic mr-2"></i> Get Explanation
+            </button>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="mt-4 hidden text-center text-blue-500">
+                <i class="fas fa-spinner fa-spin mr-2"></i> Loading...
+            </div>
+
+            <!-- Explanation Output -->
+            <div id="explanationOutput" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-gray-700 leading-relaxed text-justify hidden">
+                <!-- Explanation will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const conceptInput = document.getElementById('conceptInput');
+            const explainButton = document.getElementById('explainButton');
+            const explanationOutput = document.getElementById('explanationOutput');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            explainButton.addEventListener('click', async () => {
+                const prompt = conceptInput.value.trim();
+                if (!prompt) {
+                    explanationOutput.textContent = "Please enter a concept to explain.";
+                    explanationOutput.classList.remove('hidden');
+                    return;
+                }
+
+                explanationOutput.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
+                explainButton.disabled = true; // Disable button during loading
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: `Explain the following tech concept clearly and concisely for a developer: "${prompt}"` }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will automatically provide the API key at runtime
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`API error: ${response.status} ${response.statusText} - ${errorData.error.message || 'Unknown error'}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        explanationOutput.textContent = text;
+                        explanationOutput.classList.remove('hidden');
+                    } else {
+                        explanationOutput.textContent = "Could not generate an explanation. Please try again.";
+                        explanationOutput.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error("Error fetching explanation:", error);
+                    explanationOutput.textContent = `Error: ${error.message}. Failed to fetch explanation. Please check your input or try again later.`;
+                    explanationOutput.classList.remove('hidden');
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                    explainButton.disabled = false; // Re-enable button
+                }
+            });
+        });
+    </script>
+</body>
+</html>
